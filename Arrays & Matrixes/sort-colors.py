@@ -3,10 +3,10 @@ class Solution:
         """
         Do not return anything, modify nums in-place instead.
         """
-        min_idx = 0
+        k = 0
         for i in range(3):
             for j in range(len(nums)):
-                if i == nums[j]:
-                    nums[min_idx], nums[j] = nums[j], nums[min_idx]
-                    min_idx += 1
+                if nums[j] == i:
+                    nums[k], nums[j] = nums[j], nums[k]
+                    k += 1
         return nums
