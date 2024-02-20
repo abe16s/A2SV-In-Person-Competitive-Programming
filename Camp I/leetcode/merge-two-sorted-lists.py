@@ -5,22 +5,21 @@
 #         self.next = next
 class Solution:
     def mergeTwoLists(self, list1: Optional[ListNode], list2: Optional[ListNode]) -> Optional[ListNode]:
-        dummy = ListNode()
-        cout = dummy
-        while list1 and list2:
-            if list1.val < list2.val:
-                dummy.next = list1
-                list1 = list1.next
-            else:
-                dummy.next = list2
-                list2 = list2.next
-            dummy = dummy.next
-        if list1:
-            dummy.next = list1
-        if list2:
-            dummy.next = list2
+        if not list1:
+            return list2
+        if not list2:
+            return list1
         
-        return cout.next
-
-
+        if list1.val < list2.val:
+            cur = list1
+            temp = cur.next
+            cur.next = None
+            list1 = temp
+        else:
+            cur = list2
+            temp = cur.next
+            cur.next = None
+            list2 = temp
         
+        cur.next = self.mergeTwoLists(list1, list2)
+        return cur
